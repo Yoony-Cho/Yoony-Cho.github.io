@@ -14,7 +14,7 @@ const ContentSecurityPolicy = `
   frame-src giscus.app
 `
 const nextConfig = {
-  basePath: '/{yoony-cho.github.io}',
+  basePath: '/yoony-cho.github.io',
 }
 
 const securityHeaders = [
