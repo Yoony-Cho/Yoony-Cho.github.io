@@ -13,6 +13,9 @@ const ContentSecurityPolicy = `
   font-src 'self';
   frame-src giscus.app
 `
+const nextConfig = {
+  basePath: '/{yoony-cho.github.io}',
+}
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
