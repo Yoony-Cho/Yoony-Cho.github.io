@@ -1,0 +1,227 @@
+---
+title: '[Swift] the basic contept of a function'
+date: 2023-05-31T00:32:14Z
+lastmod: '2021-02-01'
+tags: ['Swift', 'cs', 'function', 'Ios', 'languages']
+draft: false
+summary: 'Let's find out the basic form and role of function in computer language through Swift language'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/new-features-in-v1/
+---
+
+## What is a DOM?
+
+The rendering engine of a browser parses the HTML document to create a tree-like data structure called the Document Object Model (DOM), which represents the hierarchical structure and information of the HTML document and provides an API of properties and methods to manipulate it.
+
+## Node?
+
+### HTML Elements and Node Objects.
+
+HTML elements refer to individual components that make up an HTML document.
+HTML elements are parsed by the rendering engine and converted into element node objects that make up the DOM.
+Attributes of HTML elements are transformed into attribute nodes, and the text content of HTML elements is transformed into text nodes.
+
+Reflecting the parent-child relationships between HTML elements, all node objects that represent HTML elements are organized into a tree data structure.
+
+### Tree data structure.
+
+"A tree data structure is composed of a hierarchical structure of nodes.
+The tree data structure made up of node objects is called the DOM.
+
+The DOM is composed of a hierarchical structure of node objects, which come in 12 different types and have an inheritance structure.
+Among these node types, there are four important ones.
+
+#### 1. Document Node
+
+The document object refers to the top-level root node of the DOM tree, which points to the entire HTML document rendered by the browser.
+It is bound to the document property of the global object window.
+
+#### 2. Element Node
+
+An object that points to an HTML element.
+
+#### 3. Attribute Node
+
+It is an object that points to the attributes of an HTML element.
+While element nodes are connected to their parent nodes, attribute nodes are only connected to their element nodes.
+
+#### 4. Text Node
+
+An object that refers to the text of an HTML element.
+It is the final end of the DOM tree because it is a leaf node that cannot have a child node.
+
+## Inheritance structure of node objects
+
+The node objects that make up the DOM are host objects provided by the browser environment, rather than standard built-in objects. However, since node objects are still JavaScript objects, they have an inheritance structure based on prototypes.
+
+All node objects inherit from the Object, EventTarget, and Node interfaces. In addition, the document node inherits from the Document and HTMLDocument interfaces, attribute nodes inherit from the Attr interface, text nodes inherit from the CharacterData interface, and element nodes inherit from the Element interface.
+
+From the perspective of the prototype chain, an input element node, for example, would inherit from the prototype objects bound to HTMLInputElement, HTMLElement, Element, Node, EventTarget, and Object.
+
+Developers can check the inheritance structure of node objects in the Properties panel on the right side of the Elements panel in the browser's developer tools.
+
+## Acquiring element nodes.
+
+### 1. Using id.
+
+Use the Document.prototype.getElementById method.
+
+It searches for and returns a single element node with the id passed as an argument.
+
+The id value must be unique within the HTML document. If there are multiple elements with the same id, only the first one with the matching id will be returned.
+
+If there is no element node with the specified id, it returns null.
+
+If an HTML element has an id attribute, declaring it with the same name as the id value creates an implicit global variable that refers to the corresponding element node. However, if there is already a global variable with the same name, the node object will not be reassigned to the global variable."
+
+### 2. Using tag name.
+
+The Document.prototype/Element.prototype.getElementsByTagName method retrieves all element nodes that have the specified tag name and returns them.
+
+This method returns a DOM collection object called HTMLCollection, which contains multiple element node objects.
+
+The HTMLCollection object is an array-like object and iterable.
+
+```js:tailwind.config.js
+<script>
+	const $fruits = document.getElementById('fruits');
+    const $lisFromFruits = $fruits.getElementsByTagName('li');
+</script>
+```
+
+### 3. Using class attribute.
+
+Use the Document.prototype/Element.prototype.getElementsByClassName method to retrieve all element nodes that have the specified class value.
+
+The method takes an argument of the class value and returns all element nodes that have that value, even if there are multiple values separated by whitespace.
+
+This method also returns a DOM collection object, specifically an HTMLCollection object, which is an array-like object that is iterable.
+
+### 4. Using CSS selectors.
+
+CSS selectors are syntax used to specify HTML elements when applying styles.
+
+```js:tailwind.config.js
+/* 전체 선택자 */
+* { ... }
+
+/* 태그 선택자 */
+p { ... }
+
+/* id 선택자 */
+#foo { ... }
+
+/* class 선택자 */
+.foo { ... }
+
+/* 어트리뷰트 선택자 */
+input[type=text] { ... }
+
+/* 후손 선택자 */
+div p { ... }
+
+/* 자식 선택자 */
+div > p { ... }
+
+/* 인접 형제 선택자: p 요소 바로 뒤에 위치하는 ul 요소 선택 */
+p + ul { ... }
+
+/* 일반 형제 선택자: p 요소 뒤에 위치하는 ul 요소 모두 선택 */
+p ~ ul { ... }
+
+/* 가상 클래스 선택자 */
+a:hover { ... }
+
+/* 가상 요소 선택자 : p 요소 콘텐츠의 앞에 위치하는 공간 선택 */
+p::before { ... }
+```
+
+Document.prototype/Element.prototype.querySelector method searches for and returns one element node that satisfies the CSS selector passed as an argument.
+
+If multiple element nodes satisfy the selector, only the first one will be returned.
+
+Document.prototype/Element.prototype.querySelectorAll method searches for and returns all element nodes that satisfy the CSS selector passed as an argument.
+
+It returns a DOM collection object, NodeList, that contains multiple node objects.
+
+The querySelector and querySelectorAll methods that use CSS selector syntax are known to be slower than the getElementById and getElementsBy\*\*\* methods introduced earlier, but they have the advantage of allowing for more specific conditions to be used to acquire element nodes.
+
+The book recommends using the getElementById method when acquiring element nodes with an id attribute and using CSS selector syntax for all other cases.
+
+### 5. Checking if a specific element node can be acquired.
+
+The Element.prototype.matches method checks if a specific element node can be acquired through the CSS selector passed as an argument.
+
+This is useful when using event delegation, and we'll cover more details on how to use it in a future post.
+
+### 6. HTMLCollection and NodeList.
+
+HTMLCollection is a live object that reflects the current state of the node objects.
+
+NodeList may behave as a live object depending on the situation, but mostly it is a non-live object.
+
+```js:tailwind.config.js
+<!DOCTYPE html>
+<head>
+  <style>
+    .red{
+      color : red;
+    }
+    .blue{
+      color : blue;
+    }
+  </style>
+</head>
+<html>
+  <body>
+    <ul>
+      <li class="red">pizza</li>
+      <li class="red">noddle</li>
+      <li class="red">rice</li>
+    </ul>
+    <script>
+      const $elems=document.getElementsByClassName('red');
+      for(let i = 0;i<$elems.length;i++){
+        $elems[i].className='blue';
+      }
+    </script>
+  </body>
+</html>
+```
+
+$elems is assigned an HTMLCollection object containing 3 li elements with the class name 'red'. When using a for loop to change the class name of each li element to 'blue', the following occurs:
+
+The class name of the first li element is changed to 'blue'.
+As a result, this element is removed from $elems in real-time since it no longer has the class name 'red'.
+Since $elems now only contains the second and third li elements, the third element is removed when i=1.
+The second li element is then removed from $elems.
+When i=2, but $elems.length is 1, the for loop ends.
+To prevent this from happening, it is recommended to convert the HTMLCollection object into an array before using it.
+
+### 7. NodeList
+
+The querySelectorAll method returns a NodeList object, which is a non-live object that does not reflect changes to the state of node objects in real-time. However, the NodeList object returned by the childNodes property is a live object.
+
+```js:tailwind.config.js
+<!DOCTYPE html>
+<html>
+  <body>
+    <ul id="fruits">
+      <li>pizza</li>
+      <li>noddle</li>
+    </ul>
+    <script>
+      const $fruits= document.getElementById('fruits');
+      const {childNodes} = $fruits;
+      console.log(childNodes);
+      for(let i = 0;i<childNodes.length;i++){
+        $fruits.removeChild(childNodes[i]);
+      }
+      console.log(childNodes);
+    </script>
+  </body>
+</html>
+```
+
+Since $fruits is a live object, it is updated each time a child node is removed, and not all child nodes are deleted. Therefore, it is recommended to convert it to an array for use.

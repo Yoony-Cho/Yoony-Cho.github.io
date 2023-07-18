@@ -1,0 +1,46 @@
+---
+title: '[Flutter] Domain and DNS'
+date: 2023-07-05T00:32:14Z
+lastmod: '2021-02-01'
+tags: ['Flutter', 'cs', 'Domain', 'DNS']
+draft: false
+summary: '도메인과 DNS에 대한 정리'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/new-features-in-v1/
+---
+
+## What is a Domain?
+
+#### IP란?
+
+IP는 인터넷에 연결되어 있는 장치를 각각 식별할 수 있도록 구분해 놓은 주소를 뜻한다. 
+
+216.58.200.14와 같이 총 4자리 IPv4 형태의 숫자로 구성되어 있다 이를 주소창에 입력하면 해당 IP주소가 가르키고 있는 페이지로 연결이 된다.
+
+
+
+#### Domain은 그럼 뭘까?
+
+도메인은 IP주소를 조금 더 쉽게 파악할 수 있도록 이름을 부여한 거라고 보면 된다.
+
+예를 들어 IP 216.58.200.14는 도메인 google.com과 동일하다.
+둘 다 google의 메인 화면으로 접속할 수 있는 주소이다.
+
+##### 도메인의 구성요소
+
+도메인은 컴퓨터의 이름과 최상위 도메인으로 구성이 되어있다.
+여기서 컴퓨터의 이름은 google이 되고 com이 최상위 도메인이 된다.
+
+
+
+## DNS(Domain Name System)?
+
+그럼 DNS란 무엇인가? DNS는 Domain Name System의 약자로 도메인을 머신이 읽을 수 있는 IP주소로 변환해주는 시스템이다.
+
+우리가 주소창에 google.com을 입력하게 되면 머신이 알아서 google.com이해해서 브라우저에 띄워주는게 아니다.
+
+##### DNS의 기본 동작
+
+주소창에 google.com을 입력하면 DNS서버에 해당 검색 도메인을 보내고 DNS서버에서는 IP를 보내준다. 
+DNS 서버에서 IP 216.58.200.14를 보내주면 그걸 다시 호스팅 서버에 보내고 호스팅 서버에서 해당 주소에 대한 내용을 보내주면 우리가 브라우저에서 볼 수 있게 된다.
